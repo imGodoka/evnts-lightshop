@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>MY APP</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="http://jquerypriceformat.com/js/jquery.price_format.2.0.js"></script>	
+		<script>
+		$(function(){
+			$('#priceinpt').priceFormat({
+				prefix: 'R$ ',
+				centsSeparator: ',',
+				thousandsSeparator: '.',
+				allowNegative: false
+			});
+		});
+		</script>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<style>
+		.listagem {
+			margin: 10px;
+			padding: 0;
+			width: 25%;
+			height: auto;
+			border: 1px solid #333;
+			border-radius: 5px;
+			vertical-align: top;
+			display: inline-block;
+		}
+
+		.listagem > li {
+			padding: 5px;
+			list-style-type: none;
+		}
+		</style>
+
+	</head><body style="margin: 25px;">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">RaitoShop - Admin</a>
+    </div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li><a href="/">Cadastro <span class="sr-only">(current)</span></a></li>
+			<li  class="active"><a href="/listagem">Listagem</a></li>
+		  </ul>
+		  <div class="navbar-form navbar-left">
+			<div class="form-group">
+			  <input type="text" class="form-control" id="search" placeholder="Pesquisar">
+			</div>
+			<button id="butsr" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+			<button id="reset" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span></button>
+			
+		  </div>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	
+	<div class="col-md-12" style="margin: 0 auto;">
+		<h1>Produtos cadastrados</h1>
+		<br>
+				<% for(var i=0; i<database.length; i++) {%>
+					<ul class="list-group listagem <%= database[i].categorysltc %>">
+							<li class=""><span><b>Produto:</b> <%= database[i].nameinpt %></span></li>
+							<li><span><b>Preço:</b> <%= database[i].priceinpt %></span></li>
+							<li><span><b>Descrição:</b> <span><%= database[i].desctxt %></span></li>
+							<li><span><b>Categoria(s):</b> <span><%= database[i].categorysltc %></span></li>
+							
+					</ul>
+				<% } %>
+	</div>
+
+	<script>
+	
+	$( "#butsr" ).click(function() {
+		var mysearch = $( "#search" ).val();
+		$(".list-group").css("display", "inline-block");
+		$(".listagem").css("display", "inline-block");
+		$(".list-group").css("display", "none");
+		$(".listagem").css("display", "none");
+		$("." + mysearch).css("display", "inline-block");
+	});
+	
+	
+	$( "#reset" ).click(function() {
+		window.location = '/listagem';
+	});
+	
+	
+	
+	</script>	
+	</body>
+</html>
